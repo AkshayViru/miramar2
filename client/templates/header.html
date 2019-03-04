@@ -1,0 +1,21 @@
+<template name="header">
+  <header class="main-header">
+    <div class="container">
+      <ul>
+        <li>
+          <a href="/">
+            <img class="logo" src="https://i.imgur.com/PZjukW7.png" alt="Miramar Logo"/>
+          </a>
+        </li>
+        {{#if currentUser}}
+          <li class="usern">
+            <button data-id="username">{{user}}</button>
+          </li>
+          <li class="u-pull-right sign-out">
+            <button id="sign-out">Sign Out<i class="fa fa-sign-out fa-lg"></i></button>
+          </li>
+        {{/if}}
+      </ul>
+    </div>
+  </header>
+</template>
