@@ -1,0 +1,43 @@
+<template name="navigation">
+  <div class="row">
+    <div class="twelve columns">
+      <div class="navigation">
+        <ul>
+          <li class="{{activeIfRouteNameIs 'feed'}}">
+                <a href="{{pathFor 'feed'}}"><i class="fa fa-list"></i> Feed</a>
+          </li>
+          <li class="{{activeIfRouteNameIs 'browseUsers'}}">
+            <a href="{{pathFor 'browseUsers'}}"><i class="fa fa-users"></i> Browse users</a>
+          </li>
+        </ul>
+        <hr>
+        <ul>
+          <li class="{{activeIfRouteNameIs 'following'}}">
+            <a href="{{pathFor 'following'}}"><i class="fa fa-arrow-left"></i> <i class="fa fa-user"></i> Following</a>
+          </li>
+          <li class="{{activeIfRouteNameIs 'follower'}}">
+            <a href="{{pathFor 'follower'}}"><i class="fa fa-arrow-right"></i> <i class="fa fa-user"></i> Followers</a>
+          </li>
+          <li class="{{activeIfRouteNameIs 'updateProfile'}}">
+            <a href="{{pathFor 'updateProfile'}}"><i class="fa fa-cogs"></i> Update profile</a>
+          </li>
+        </ul>
+        <hr>
+        <ul>
+          <li class="{{activeIfRouteNameIs 'gemeral'}}">
+            <a href="{{pathFor 'general'}}"><i class="fa fa-superpowers"></i> General</a>
+          </li>
+          <li class="{{activeIfRouteNameIs 'politics'}}">
+              <a href="{{pathFor 'politics'}}"><i class="fa  fa-check-square-o"></i> Politics</a>
+          </li>
+          <li class="{{activeIfRouteNameIs 'tech'}}">
+              <a href="{{pathFor 'tech'}}"><i class="fa fa-laptop"></i> Technology</a>
+          </li>
+          <li class="{{activeIfRouteNameIs 'sports'}}">
+              <a href="{{pathFor 'sports'}}"><i class="fa fa-futbol-o"></i> Sports</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>

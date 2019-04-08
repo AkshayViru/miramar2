@@ -2,7 +2,7 @@
   {{> header}}
   <div class="container">
     {{# if currentUser}}
-      <div class="row">
+      <div class="container1">
         <div class="four columns">
           {{> navigation}}
         </div>
@@ -12,8 +12,8 @@
       </div>
     {{else}}
       <div class="row">
-        <div class="four columns offset-by-four">
-          {{> index}}
+        <div class="two columns offset-by-four" style="width: 30%">
+          {{> Template.dynamic template=main}}
         </div>
       </div>
     {{/if}}

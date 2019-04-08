@@ -1,6 +1,14 @@
 Template.header.events({
-  'click #sign-out': function(e) {
-    console.log('logging out user');
-    Meteor.logout();
+  'click [data-id=sign-out]': function() {
+    Meteor.logout(function(error) {
+      if (error) {
+        alert(error.reason);
+      } else {
+        FlowRouter.go('/sign-in');
+      }
+    });
+  },
+  'click [data-id=new-post]': function() {
+    FlowRouter.go('/new-post');
   }
 });

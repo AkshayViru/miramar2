@@ -1,7 +1,7 @@
 /*import ipfs from 'browser-ipfs';
 
-/*
- * WORKING BUT NEED INFURA.IO IPFS NODE => Go to browser node with lib like libp2p-ipfs-browser
+
+ //* WORKING BUT NEED INFURA.IO IPFS NODE => Go to browser node with lib like libp2p-ipfs-browser
  
 
 ipfs.setProvider({ host: 'ipfs.infura.io', port: 5001, protocol: 'https', root: '/api/v0' });
