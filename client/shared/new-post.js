@@ -1,13 +1,29 @@
-Template.feed.events({
+Template.newpost.events({
      
+    'keyup [data-id=body]': (event, template) => {
+        // If body section has text enable the submit button, else disable it
+        if (template.find('[data-id=body]').value.toString().trim() !== '') {
+          $('input[type=submit]').removeClass('disabled');
+        } else {
+          $('input[type=submit]').addClass('disabled');
+        }
+    
+        // When shift and enter are pressed, submit form
+        if (event.shiftKey && event.keyCode === 13) {
+          $('[data-id=insert-post-form]').submit();
+        }
+      },
+
     'click [id=StakeSubmit]': (event, template) => {
       event.preventDefault();
   
       // Only continue if button isn't disabled
-      if (!$('input[type=submit]').hasClass('disabled')) {
+      if (!$('input[type=submit]').hasClass('disabled')) {4
+        let title = template.find("#post-title").value;
         let body = template.find('[data-id=body]').value;
         let stake_val = template.find("#stake_val").value;
-  
+        let branch = template.find("#branch").value;
+
         // If a user is mentioned in the post add span with class to highlight their username
         if(body.indexOf('@') !== -1) {
           for(let x = 0; x < body.length; x++) {
@@ -38,17 +54,20 @@ Template.feed.events({
               console.error(error);
         });
   
-        Meteor.call('posts.insert', body, stake_val, (error, result) => {
+        Meteor.call('posts.insert', title, body, stake_val, branch, (error, result) => {
           if (error) {
             Bert.alert(error.reason, 'danger', 'growl-top-right');
           } else {
             Bert.alert('Post successfully submitted', 'success', 'growl-top-right');
-            template.find('[data-id=body]').value = '';
-            template.find("#stake_val").value = '';
             $('[data-id=body]').css('height', '39px');
             $('input[type=submit]').addClass('disabled');
+            FlowRouter.go('/'+ branch);
           }
         });
       }
     },
+
+    'click [id=cancel]': (event, template) => {
+        FlowRouter.go('/');
+    }
 });

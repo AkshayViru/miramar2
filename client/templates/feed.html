@@ -1,32 +1,9 @@
 <template name="feed">
-  <div class="row">
-    <div class="twelve columns">
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="twelve columns">
-      <div class="text-center">
-        <ul class="feed-filter">
-          <li><button type="button" class="{{activeIfFilterIs 'all'}}" data-id="all">All</button></li>
-          <li><button type="button" class="{{activeIfFilterIs 'following'}}" data-id="following">Following</button></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  
   <div class="text-center">
   <button type="button" class="button-primary" data-id="claim">Get free MRM!</button>
   </div>
   <hr>
-  <div class="row">
-    <div class="twelve columns">
-      <form data-id="insert-post-form">
-        {{>textareaAutocomplete settings=settings data-id="body" class="u-full-width insert-post-form" rows="1" placeholder="Write something..." }}
-        <input type="submit" class="button-primary u-pull-right" value="Submit" id="StakeSubmit">
-        <input type="number" min="0" id="stake_val" step="10" class="u-pull-right" placeholder="Enter stake amount" style="width: 175px">
-      </form>
-    </div>
-  </div>
   <div class="row">
     <div class="twelve columns">
       {{#each posts}}

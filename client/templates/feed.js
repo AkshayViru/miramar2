@@ -67,6 +67,7 @@ Template.feed.helpers({
   }
 });
 
+
 Template.feed.events({
   //claim free tokens
   'click [data-id=claim]': (event, template) => {
@@ -94,7 +95,7 @@ Template.feed.events({
       });
     }    
   },
-
+/*
   'keyup [data-id=body]': (event, template) => {
     // If body section has text enable the submit button, else disable it
     if (template.find('[data-id=body]').value.toString().trim() !== '') {
@@ -159,7 +160,7 @@ Template.feed.events({
         }
       });
     }
-  },
+  },*/
 
   'click [data-id=all]': (event, template) => {
     template.filter.set('all');
@@ -183,3 +184,4 @@ Template.feed.events({
     event.preventDefault();
   }
 });
+

@@ -3,7 +3,8 @@
     <div class="twelve columns">
       {{#with post}}
         <div class="post">
-          {{#markdown}}{{body}}{{/markdown}}
+          <a href="{{pathFor 'postdetail' postid=_id}}" class="posttitle" >{{title}}</a>
+          <a href="{{pathFor 'branch' branch_name=branch}}" class="branch u-pull-right">{{branch}}</a>
           <hr>
           <div class="post-line-two">
             <div class="post-line-two-left">

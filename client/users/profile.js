@@ -1,7 +1,7 @@
 Template.profile.events({
   'click [data-id=load-more]': (event, template) => {
     template.limit.set(template.limit.get() + 20);
-  }
+  } 
 });
 
 Template.profile.helpers({
@@ -10,7 +10,7 @@ Template.profile.helpers({
   },
 
   posts: function() {
-    return Posts.find({}, { sort: { createdAt: -1 } });
+    return Posts.find({authorId: FlowRouter.getParam('_id')}, { sort: { likecount: -1 } });
   },
 
   hasMorePosts: () => {

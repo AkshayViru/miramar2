@@ -1,19 +1,19 @@
-<template name="new-post">
+<template name="newpost">
         <form data-id="insert-post-form">
                 TITLE
                 <br>
                 <input type="text" id="post-title" placeholder="Post title here." required>
                 <br>
-                <textarea id="body" class="text" cols="66" rows ="20" placeholder="Enter your content" required></textarea>
+                <textarea data-id="body" class="text" cols="66" rows ="20" placeholder="Enter your content" required></textarea>
                 <br>
                 BRANCH
                 <br>
                 <select name="branch" id="branch">
                         <option value="" disabled selected>Which branch are you posting to?</option>
-                        <option value="general">General</option>
-                        <option value="politics">Politics</option>
-                        <option value="tech">Tech</option>
-                        <option value="sports">Sports</option>
+                        <option value="General">General</option>
+                        <option value="Politics">Politics</option>
+                        <option value="Technology">Tech</option>
+                        <option value="Sports">Sports</option>
                 </select>
                 <br>
                 STAKE
@@ -21,6 +21,8 @@
                 <input type="number" min="1" id="stake_val" max="100" placeholder="Enter stake amount" style="width: 175px" required>
                 <br>
                 <input type="submit" class="button-primary" value="Submit" id="StakeSubmit">
+                <button type="button" id="cancel"><b>Cancel</b></button>
         </form>
+        
 </template>
       

@@ -1,7 +1,7 @@
 Posts = new Mongo.Collection('posts');
 
 Meteor.methods({
-  'posts.insert': (body) => {
+  'posts.insert': (title, body, stake_val, branch,) => {
     check(body, String);
 
     if (!Meteor.user()) {
@@ -12,11 +12,14 @@ Meteor.methods({
     }
 
     let post = {
+      title:title,
       body: body,
       authorId: Meteor.userId(),
       createdAt: new Date(),
       updatedAt: new Date(),
       likecount: 0,
+      stake_val: stake_val,
+      branch:branch,
       already_voted: []
     };
 

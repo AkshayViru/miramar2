@@ -1,0 +1,23 @@
+<template name="postdetail">
+        <div class="row">
+          <div class="twelve columns">
+              <div class="postdetail">
+                    <p class="u-pull-right formatted-date">{{formatDate postid.createdAt}}</p>
+                    <a href="{{pathFor 'branch' branch_name=branch}}" class="branch u-pull-left">{{postid.branch}}</a>
+                    <br>
+                    <h1>{{postid.title}}</h1>
+                    <a href="{{pathFor 'profile' _id=author._id}}">
+                            {{> avatar user=author size='small' shape='circle' class='u-pull-left avatar'}}
+                    </a>
+                    <a href="{{pathFor 'profile' _id=author._id}}" class="u-pull-left author">@{{author.username}}</a>
+                    <button class="no-button u-pull-right" data-id="like-post" >
+                            <i class="fa fa-thumbs-o-up fa-2x {{#if isLiked}}liked{{/if}} u-pull-left " aria-hidden="true"></i><h6>{{postid.likecount}}</h6>
+                    </button>
+                    <hr>
+                    <br>
+                    {{postid.body}}
+              </div>    
+          </div>
+        </div>
+</template>
+      
