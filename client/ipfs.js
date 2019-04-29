@@ -1,4 +1,4 @@
-/*import ipfs from 'browser-ipfs';
+import ipfs from 'browser-ipfs';
 
 
  //* WORKING BUT NEED INFURA.IO IPFS NODE => Go to browser node with lib like libp2p-ipfs-browser
@@ -33,7 +33,7 @@ const ipfsService = {
 export default ipfsService;
 
 
-  
+  /*
 const IPFS = require('ipfs-api');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 

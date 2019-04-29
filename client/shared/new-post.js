@@ -17,13 +17,15 @@ Template.newpost.events({
     'click [id=StakeSubmit]': (event, template) => {
       event.preventDefault();
   
+
       // Only continue if button isn't disabled
       if (!$('input[type=submit]').hasClass('disabled')) {4
         let title = template.find("#post-title").value;
         let body = template.find('[data-id=body]').value;
         let stake_val = template.find("#stake_val").value;
         let branch = template.find("#branch").value;
-
+        let ipfshash= "";
+        
         // If a user is mentioned in the post add span with class to highlight their username
         if(body.indexOf('@') !== -1) {
           for(let x = 0; x < body.length; x++) {
@@ -53,17 +55,55 @@ Template.newpost.events({
           else
               console.error(error);
         });
-  
-        Meteor.call('posts.insert', title, body, stake_val, branch, (error, result) => {
+        
+        if(buf){
+          Meteor.call('photo.insert', buf,(error, result) => {
+            if (error) {
+              Bert.alert(error.reason, 'danger', 'growl-top-right');
+            }
+            if(result){
+              console.log(result);
+              Meteor.call('posts.insert', title, body, stake_val, branch, result, (error, result) => {
+                if (error) {
+                  Bert.alert(error.reason, 'danger', 'growl-top-right');
+                } else {
+                  Bert.alert('Post successfully submitted', 'success', 'growl-top-right');
+                  $('[data-id=body]').css('height', '39px');
+                  $('input[type=submit]').addClass('disabled');
+                  //FlowRouter.go('/branches/'+ branch);
+                }
+              });
+            }
+          });
+        }
+        /*var reader = new FileReader();
+
+        reader.onload = function(event){          
+           var buffer = new Uint8Array(reader.result) */
+         //  Meteor.call('photo.insert', file);
+     //   }
+
+        
+      }
+    },
+
+    'change [id=photo]':(event,template) => {
+      event.preventDefault();
+
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(event.target.files[0]);
+      console.log(reader)
+      reader.onloadend = function() {
+        //const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
+        let Buffer = require('buffer/').Buffer;
+        buf = Buffer.from(reader.result);
+        /*Meteor.call('photo.insert', buf,(error, result) => {
           if (error) {
             Bert.alert(error.reason, 'danger', 'growl-top-right');
-          } else {
-            Bert.alert('Post successfully submitted', 'success', 'growl-top-right');
-            $('[data-id=body]').css('height', '39px');
-            $('input[type=submit]').addClass('disabled');
-            FlowRouter.go('/'+ branch);
           }
-        });
+          else{
+          }
+        });*/
       }
     },
 

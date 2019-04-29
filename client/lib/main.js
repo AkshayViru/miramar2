@@ -1,3 +1,5 @@
+global.Buffer = global.Buffer || require("buffer").Buffer;
+
 import ipfs from '/client/ipfs';
 
 if (typeof web3 !== 'undefined') {
