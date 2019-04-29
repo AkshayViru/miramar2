@@ -1,4 +1,4 @@
-# Login Demo with [MeteorJS](https://www.meteor.com/), [Ethereum](https://ethereum.org/) & [MetaMask](https://metamask.io/)
+# Social News Platform using [MeteorJS](https://www.meteor.com/), [Ethereum](https://ethereum.org/) & [MetaMask](https://metamask.io/)
 
 ## Installation
 ```sh
