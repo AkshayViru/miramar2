@@ -11,7 +11,10 @@
     "filereader": "^0.10.3",
     "ipfs-api": "^26.1.2",
     "ipfs-http-client": "^29.1.1",
+    "ipfs-only-hash": "^1.0.2",
+    "ipfsd-ctl": "^0.42.2",
     "meteor-node-stubs": "^0.3.2",
+    "multihashing-async": "^0.7.0",
     "web3": "^1.0.0-beta.37"
   }
 }

@@ -14,7 +14,7 @@ Template.newpost.events({
         }
       },
 
-    'click [id=StakeSubmit]': (event, template) => {
+    'click [id=StakeSubmit]': async (event, template) => {
       event.preventDefault();
   
 
@@ -55,34 +55,29 @@ Template.newpost.events({
           else
               console.error(error);
         });
-        
+
         if(buf){
-          Meteor.call('photo.insert', buf,(error, result) => {
-            if (error) {
-              Bert.alert(error.reason, 'danger', 'growl-top-right');
-            }
-            if(result){
-              console.log(result);
-              Meteor.call('posts.insert', title, body, stake_val, branch, result, (error, result) => {
-                if (error) {
-                  Bert.alert(error.reason, 'danger', 'growl-top-right');
-                } else {
-                  Bert.alert('Post successfully submitted', 'success', 'growl-top-right');
-                  $('[data-id=body]').css('height', '39px');
-                  $('input[type=submit]').addClass('disabled');
-                  //FlowRouter.go('/branches/'+ branch);
-                }
-              });
-            }
-          });
+          ipfshash = await new Promise((resolve, reject) =>
+            Meteor.call('photo.insert', buf,(error, result) => {
+              if (error) {
+                Bert.alert(error.reason, 'danger', 'growl-top-right');
+              }
+              else{
+                resolve(result)
+              }
+            })
+           );
         }
-        /*var reader = new FileReader();
-
-        reader.onload = function(event){          
-           var buffer = new Uint8Array(reader.result) */
-         //  Meteor.call('photo.insert', file);
-     //   }
-
+        Meteor.call('posts.insert', title, body, stake_val, branch, ipfshash, (error, result) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger', 'growl-top-right');
+        } else {
+          Bert.alert('Post successfully submitted', 'success', 'growl-top-right');
+          $('[data-id=body]').css('height', '39px');
+          $('input[type=submit]').addClass('disabled');
+          FlowRouter.go('/branches/'+ branch);
+          }
+        });
         
       }
     },
