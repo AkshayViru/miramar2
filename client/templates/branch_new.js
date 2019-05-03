@@ -1,4 +1,4 @@
-Template.branch.onCreated(function () {
+Template.branch_new.onCreated(function () {
     this.searchQuery = new ReactiveVar('');
     this.filter = new ReactiveVar('all');
     this.limit = new ReactiveVar(20);
@@ -10,9 +10,9 @@ Template.branch.onCreated(function () {
     });
   });
   
-Template.branch.helpers({    
+Template.branch_new.helpers({    
     posts: () => {
-        return Posts.find({branch: FlowRouter.getParam('branch_name')}, { sort: { likecount: -1 } });
+        return Posts.find({branch: FlowRouter.getParam('branch_name')}, { sort: { createdAt: -1 } });
     },
 
     activeIfFilterIs: (filter) => {
@@ -22,7 +22,7 @@ Template.branch.helpers({
     }
   });
 
-  Template.branch.events({
+  Template.branch_new.events({
     'click [data-id=all]': (event, template) => {
       template.filter.set('all');
     },

@@ -58,5 +58,17 @@ Meteor.methods({
       Posts.update( { _id: _id }, { $pull: { already_voted: Meteor.userId() } });
       Posts.update({ _id: _id }, { $inc: { likecount: -1} });
     }
+  },
+  'posts.update_stake':(_id) => {
+    check(_id, String);
+
+    if (!Meteor.user()) {
+      throw new Meteor.Error(401, 'You need to be signed in to continue');
+    }
+    if (!_id) {
+      throw new Meteor.Error(422, '_id should not be blank');
+    }
+
+    Posts.update({_id: _id}, {$set: {stake_val: "0"}});
   }
 });

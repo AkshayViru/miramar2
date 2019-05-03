@@ -56,7 +56,7 @@ Template.newpost.events({
               console.error(error);
         });
 
-        if(buf){
+        if(typeof(buf)!=='undefined'){
           ipfshash = await new Promise((resolve, reject) =>
             Meteor.call('photo.insert', buf,(error, result) => {
               if (error) {
@@ -78,7 +78,6 @@ Template.newpost.events({
           FlowRouter.go('/branches/'+ branch);
           }
         });
-        
       }
     },
 
@@ -92,17 +91,14 @@ Template.newpost.events({
         //const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
         let Buffer = require('buffer/').Buffer;
         buf = Buffer.from(reader.result);
-        /*Meteor.call('photo.insert', buf,(error, result) => {
-          if (error) {
-            Bert.alert(error.reason, 'danger', 'growl-top-right');
-          }
-          else{
-          }
-        });*/
       }
     },
 
     'click [id=cancel]': (event, template) => {
         FlowRouter.go('/');
     }
+});
+
+Template.newpost.onCreated(function() {
+  
 });

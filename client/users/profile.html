@@ -11,6 +11,12 @@
           <div class="text-center">
             {{> followButton user=this}}
           </div>
+          <div class="text-center">
+            <form class="donate_btn">
+              <input type="number" placeholder="Donate!" id="donate" min="1">
+              <button type="submit" class="button-primary" id="donate_button">Send MRM</button>
+            </form>
+          </div>
         {{/with}}
         <hr>
         {{#each posts}}
@@ -28,5 +34,5 @@
         {{/if}}
       </div>
     </div>
-  </div>
+  </div> 
 </template>

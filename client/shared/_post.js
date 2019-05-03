@@ -39,6 +39,26 @@ Template.post.events({
         Bert.alert(error.reason, 'danger', 'growl-top-right');
       }
     });
+    let likes = Posts.findOne({ _id: this._id}).likecount;
+    let stake = Posts.findOne({_id: this._id}).stake_val;
+
+    if(likes == 2 && stake !== "0"){
+      console.log(stake);
+      let userAddress = Meteor.users.findOne({_id: this.authorId}).profile.publicKey;
+      Coursetro.transfer(userAddress, stake*2,function(error, result){
+        if(!error)
+            {
+              console.log("Post admin got rewarded")
+              Meteor.call('posts.update_stake', self._id, (error, result) => {
+                if (error) {
+                  Bert.alert(error.reason, 'danger', 'growl-top-right');
+                }
+              });
+            }
+        else
+            console.error(error);
+      });
+    }
   }
 });
 

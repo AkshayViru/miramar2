@@ -1,4 +1,4 @@
-Template.feed.onCreated(function() {
+Template.feed_new.onCreated(function() {
   this.searchQuery = new ReactiveVar('');
   this.filter = new ReactiveVar('all');
   this.limit = new ReactiveVar(20);
@@ -12,7 +12,7 @@ Template.feed.onCreated(function() {
   });
 });
 
-Template.feed.onRendered(() => {
+Template.feed_new.onRendered(() => {
   autosize($('[data-id=body]'));
 
   // Set submit button to disabled since text field is empty
@@ -34,13 +34,13 @@ Template.feed.onRendered(() => {
   }*/
 });
 
-Template.feed.helpers({
+Template.feed_new.helpers({
   posts: () => {
     const instance = Template.instance();
     if (instance.searchQuery.get()) {
       return Posts.find({}, { sort: [['score', 'desc']] });
     }
-    return Posts.find({}, { sort: { likecount: -1 } });
+    return Posts.find({}, { sort: { createdAt: -1 } });
   },
 
   activeIfFilterIs: (filter) => {
@@ -69,7 +69,7 @@ Template.feed.helpers({
 });
 
 
-Template.feed.events({
+Template.feed_new.events({
   //claim free tokens
   'click [data-id=claim]': (event, template) => {
 
@@ -169,7 +169,7 @@ Template.feed.events({
 
   'click [data-id=following]': (events, template) => {
     template.filter.set('following');
-  }, 
+  },
 
   'click [data-id=load-more]': (event, template) => {
     template.limit.set(template.limit.get() + 20);

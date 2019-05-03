@@ -1,8 +1,47 @@
 Template.profile.events({
   'click [data-id=load-more]': (event, template) => {
     template.limit.set(template.limit.get() + 20);
+  },
+  
+  'click [id=donate_button]': (event, template) => {
+    event.preventDefault();
+    let amount = template.find("#donate").value;
+
+    let receiverAddress = Meteor.users.findOne({_id: FlowRouter.getParam('_id')}).profile.publicKey;
+
+      Coursetro.transfer(receiverAddress, amount,function(error, result){
+        if(!error)
+            {
+              Bert.alert(amount + ' MRM successfully sent!', 'success', 'growl-top-right');
+            }
+        else
+            console.error(error);
+      });
+   /* }
+    else{
+              Bert.alert('Not enough balance', 'danger', 'growl-top-right');
+    }*/
   } 
 });
+
+Template.profile.onRendered(() => {
+  autosize($('[data-id=body]'));
+
+  let currentUser = Meteor.users.findOne({_id: Meteor.userId()});
+  //set max send value
+  if (currentUser && currentUser.profile) {
+    let userAddress = Meteor.users.findOne({_id: Meteor.userId()}).profile.publicKey;
+    Coursetro.balanceOf(userAddress,function(error, result){
+      if(!error)
+          {
+            $("#donate").attr("max",result);
+          }
+      else
+          console.error(error);
+    });
+  }
+});
+
 
 Template.profile.helpers({
   user: () => {
