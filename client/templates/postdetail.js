@@ -116,13 +116,13 @@ Template.postdetail.helpers({
     }
   },
   isLiked: function() {
-    if (Posts.find( { _id: FlowRouter.getParam('postid'), already_voted: { $in: [Meteor.userId()]} }).count() === 1) {""
+    if (Posts.find( { _id: FlowRouter.getParam('postid'), already_voted: { $in: [Meteor.userId()]} }).count() === 1) {
       return 'liked';
     }
     return '';
   }, 
   isUnliked: function() {
-    if (Posts.find( { _id: this._id, already_unliked: { $in: [Meteor.userId()]} }).count() === 1) {
+    if (Posts.find( { _id: FlowRouter.getParam('postid'), already_unliked: { $in: [Meteor.userId()]} }).count() === 1) {
       return 'unliked';
     }
     return '';

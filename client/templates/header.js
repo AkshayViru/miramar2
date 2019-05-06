@@ -18,7 +18,7 @@ Template.header.events({
 
 
 Template.header.helpers({
-user: () => {
-return Meteor.users.findOne({_id: Meteor.userId()}).username;
-},
+  user: () => {
+   return Meteor.users.findOne({_id: Meteor.userId()}).username;
+  },
 });
