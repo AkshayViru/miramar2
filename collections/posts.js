@@ -21,7 +21,8 @@ Meteor.methods({
       stake_val: stake_val,
       branch:branch,
       ipfshash: ipfshash,
-      already_voted: []
+      already_voted: [],
+      already_unliked: []
     };
 
     return Posts.insert(post);
@@ -51,13 +52,38 @@ Meteor.methods({
       throw new Meteor.Error(422, '_id should not be blank');
     }
 
-    if (Posts.find( { _id: _id, already_voted: { $in: [Meteor.userId()]} }).count() === 0) {
+    if (Posts.find( { _id: _id, already_unliked: { $in: [Meteor.userId()]} }).count() === 1) {
+      Posts.update( { _id: _id }, { $pull: { already_unliked: Meteor.userId() } });
+      Posts.update( { _id: _id }, { $push: { already_voted: Meteor.userId() } });
+      Posts.update({ _id: _id }, { $inc: {likecount: 2} });
+    } else if (Posts.find( { _id: _id, already_voted: { $in: [Meteor.userId()]} }).count() === 0) {
       Posts.update( { _id: _id }, { $push: { already_voted: Meteor.userId() } });
       Posts.update({ _id: _id }, { $inc: {likecount: 1} });
     } else if (Posts.find( { _id: _id, already_voted: { $in: [Meteor.userId()]} }).count() === 1) {
       Posts.update( { _id: _id }, { $pull: { already_voted: Meteor.userId() } });
       Posts.update({ _id: _id }, { $inc: { likecount: -1} });
     }
+  },
+  'posts.unlike': (_id) => {
+    check(_id, String);
+
+    if (!Meteor.user()) {
+      throw new Meteor.Error(401, 'You need to be signed in to continue');
+    }
+    if (!_id) {
+      throw new Meteor.Error(422, '_id should not be blank');
+    }
+
+    if (Posts.find( { _id: _id, already_unliked: { $in: [Meteor.userId()]} }).count() === 1) {
+      //do nothing
+    } else if (Posts.find( { _id: _id, already_voted: { $in: [Meteor.userId()]} }).count() === 1) {
+      Posts.update( { _id: _id }, { $pull: { already_voted: Meteor.userId() } });
+      Posts.update( { _id: _id }, { $push: { already_unliked: Meteor.userId() } });
+      Posts.update({ _id: _id }, { $inc: { likecount: -2} });
+    } else if (Posts.find( { _id: _id, already_unliked: { $in: [Meteor.userId()]} }).count() === 0) {
+      Posts.update( { _id: _id }, { $push: { already_unliked: Meteor.userId() } });
+      Posts.update({ _id: _id }, { $inc: {likecount: -1} });
+    } 
   },
   'posts.update_stake':(_id) => {
     check(_id, String);

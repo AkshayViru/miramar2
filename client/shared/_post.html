@@ -13,9 +13,12 @@
               </a>
               <a href="{{pathFor 'profile' _id=author._id}}" class="u-pull-left author">@{{author.username}}</a>
               <span class="fa {{#if author.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline {{/if}} ">
-              </span>
+              </span> 
               <button class="no-button" data-id="like-post" >
                 <i class="fa fa-thumbs-o-up {{#if isLiked}}liked{{/if}}" aria-hidden="true"></i>{{likecount}}
+              </button>
+              <button class="no-button" data-id="unlike-post" >
+                <i class="fa fa-thumbs-down {{#if isUnliked}}unliked{{/if}}" aria-hidden="true"></i>
               </button>
               <div class="clear"></div>
             </div> 

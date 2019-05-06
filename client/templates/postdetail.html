@@ -10,8 +10,12 @@
                             {{> avatar user=author size='small' shape='circle' class='u-pull-left avatar'}}
                     </a>
                     <a href="{{pathFor 'profile' _id=author._id}}" class="u-pull-left author">@{{author.username}}</a>
+                    <button class="no-button u-pull-right" data-id="unlike-post" >
+                        <i class="fa fa-thumbs-down fa-2x {{#if isUnliked}}unliked{{/if}} u-pull-left " aria-hidden="true"></i>
+                    </button>
+                    <h6 class="u-pull-right">{{postid.likecount}}</h6>
                     <button class="no-button u-pull-right" data-id="like-post" >
-                            <i class="fa fa-thumbs-o-up fa-2x {{#if isLiked}}liked{{/if}} u-pull-left " aria-hidden="true"></i><h6>{{postid.likecount}}</h6>
+                            <i class="fa fa-thumbs-o-up fa-2x {{#if isLiked}}liked{{/if}} u-pull-left " aria-hidden="true"></i>
                     </button>
                     <hr>
                     <br>

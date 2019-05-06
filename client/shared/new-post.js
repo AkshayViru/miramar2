@@ -68,6 +68,7 @@ Template.newpost.events({
             })
            );
         }
+
         Meteor.call('posts.insert', title, body, stake_val, branch, ipfshash, (error, result) => {
         if (error) {
           Bert.alert(error.reason, 'danger', 'growl-top-right');
@@ -86,9 +87,7 @@ Template.newpost.events({
 
       const reader = new FileReader();
       reader.readAsArrayBuffer(event.target.files[0]);
-      console.log(reader)
       reader.onloadend = function() {
-        //const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
         let Buffer = require('buffer/').Buffer;
         buf = Buffer.from(reader.result);
       }

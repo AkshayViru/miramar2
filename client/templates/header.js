@@ -13,7 +13,7 @@ Template.header.events({
   },
   'click [data-id=username]': function() {
     FlowRouter.go('/users/'+Meteor.users.findOne({_id: Meteor.userId()})._id);
-}
+  }
 });
 
 

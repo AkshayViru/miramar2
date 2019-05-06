@@ -59,6 +59,15 @@ Template.postdetail.events({
             console.error(error);
       });
     }
+  },
+  'click [data-id=unlike-post]': function(event, template) {
+    let self = FlowRouter.getParam('postid');
+
+    Meteor.call('posts.unlike', self, (error, result) => {
+      if (error) {
+        Bert.alert(error.reason, 'danger', 'growl-top-right');
+      }
+    });
   }
 });
 
@@ -109,6 +118,12 @@ Template.postdetail.helpers({
   isLiked: function() {
     if (Posts.find( { _id: FlowRouter.getParam('postid'), already_voted: { $in: [Meteor.userId()]} }).count() === 1) {""
       return 'liked';
+    }
+    return '';
+  }, 
+  isUnliked: function() {
+    if (Posts.find( { _id: this._id, already_unliked: { $in: [Meteor.userId()]} }).count() === 1) {
+      return 'unliked';
     }
     return '';
   }
