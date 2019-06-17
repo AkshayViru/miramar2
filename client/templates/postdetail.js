@@ -43,7 +43,6 @@ Template.postdetail.events({
     let stake = Posts.findOne({_id: this._id}).stake_val;
 
     if(likes == 2 && stake !== "0"){
-      console.log(stake);
       let userAddress = Meteor.users.findOne({_id: this.authorId}).profile.publicKey;
       Coursetro.transfer(userAddress, stake*2,function(error, result){
         if(!error)

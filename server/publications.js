@@ -12,6 +12,10 @@ Meteor.publish("users", function(){
   return Meteor.users.find({},{fields:{profile:1}})
 })
 
+Meteor.publish('allSurvey', function() {
+    return Survey.find();
+});
+
 Meteor.publishComposite('posts.all', function(query, filter, limit) {
   check(query, String);
   check(filter, String);
@@ -52,7 +56,7 @@ Meteor.publishComposite('posts.all', function(query, filter, limit) {
         {
           find: (post) => {
             return Meteor.users.find({ _id: post.authorId }, { fields: { emails: 1, username: 1 } });
-          }
+          } 
         }
       ]
     };
@@ -138,20 +142,9 @@ Meteor.publish('users.following', function() {
 Meteor.publish('users.follower', function() {
   if (this.userId) {
     let currentUser = Meteor.users.findOne({ _id: this.userId });
-
+    
     return Meteor.users.find({ followingIds: { $in: [currentUser._id] } }, { sort: { username: 1 } });
   } else {
     return [];
   }
 });
-
-Meteor.publish('messages.all', function() {
-  if (this.userId) {
-    let currentUser = Meteor.users.findOne({_id: this.userId});
-
-    return Messages.find({ $or: [{ originatingFromId: currentUser._id }, {originatingToId: currentUser._id }] });
-  } else {
-    return [];
-  }
-});
-

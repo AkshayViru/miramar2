@@ -199,6 +199,8 @@ Coursetro = CoursetroContract.at('0x88ECfA1A73bC1273A00a1766652Dc1F783186460');
 
 MiramarAddress = '0x3f969A63aD4c188bCeE7541A5eF74C7a65f77696';
 
+/*
+
 var UserContract = web3.eth.contract([
 	{
 		"constant": false,
@@ -554,4 +556,4 @@ var UserContract = web3.eth.contract([
 	}
 ]);
 
-UserCrt = UserContract.at('0x57f0bd09425a1239ae10fcf8a0a016d5df91e6ef');
+UserCrt = UserContract.at('0x57f0bd09425a1239ae10fcf8a0a016d5df91e6ef');*/

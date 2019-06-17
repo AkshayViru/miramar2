@@ -1,9 +1,5 @@
 import ipfs from 'browser-ipfs';
 
-
- //* WORKING BUT NEED INFURA.IO IPFS NODE => Go to browser node with lib like libp2p-ipfs-browser
- 
-
 ipfs.setProvider({ host: 'ipfs.infura.io', port: 5001, protocol: 'https', root: '/api/v0' });
 
 const ipfsService = {
@@ -31,10 +27,3 @@ const ipfsService = {
 };
 
 export default ipfsService;
-
-
-  /*
-const IPFS = require('ipfs-api');
-const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
-
-export default ipfs;*/

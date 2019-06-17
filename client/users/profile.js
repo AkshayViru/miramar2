@@ -54,11 +54,6 @@ Template.profile.helpers({
 
   hasMorePosts: () => {
     return Template.instance().limit.get() <= Template.instance().userPostsCount.get();
-  },
-
-  reputation: () =>{
-    console.log(Posts.findOne({ authorId: Meteor.userId()}))
-    return Posts.findOne({ authorId: Meteor.userId()}).likecount;
   }
 });
 

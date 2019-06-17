@@ -1,0 +1,11 @@
+<template name="survey">
+    <ol>
+        {{#each survey}}
+            <li>{{qn}}</li>
+            <input type="textbox" id="input-val" value="{{ans}}">
+            <button id="submit-btn" value="{{value}}">Get {{value}} MRM</button>
+            <hr>
+        {{/each}}
+    </ol>
+</template>
+  
